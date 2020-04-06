@@ -40,10 +40,16 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
+    'core.apps.CoreConfig',
     'users.apps.UsersConfig',
+    'resources.apps.ResourcesConfig',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
+THIRD_PARTIES_APP = [
+    'taggit',
+]
+
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTIES_APP
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

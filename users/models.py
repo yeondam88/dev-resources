@@ -21,9 +21,11 @@ class User(AbstractUser):
         ('ux_designer', 'UX Designer'),
     )
 
-    avatar = models.ImageField(null=True, blank=True)
+    avatar = models.ImageField(null=True, blank=True, upload_to="avatars")
     gender = models.CharField(max_length=10, null=True,
                               choices=GENDER_CHOICES, blank=True)
     job_title = models.CharField(
         max_length=20, null=True, choices=JOB_TITLES, blank=True)
     bio = models.TextField(default='', blank=True)
+    email_verified = models.BooleanField(default=False)
+    email_secret = models.CharField(max_length=20, default="", blank=True)
