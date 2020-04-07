@@ -1,7 +1,11 @@
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        dribbble_bg: '#F9F8FD',
+      },
+    },
   },
   variants: {},
   plugins: [],
-}
+};

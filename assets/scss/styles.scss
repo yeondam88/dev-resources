@@ -1,3 +1,309 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dribbble_bg {
+    background-color: #F9F8FD;
+}
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    list-style: none;
+    grid-gap: 36px;
+}
+
+.search-box {
+    transition: box-shadow 0.2s linear;
+    margin-bottom: 0;
+    border-color: inherit;
+
+    &:focus {
+        border-color: inherit;
+    }
+}
+
+.nav_link {
+    @apply ml-8 border-b-2 border-white h-full flex items-center;
+
+    a {
+        @apply py-10 px-5;
+    }
+
+    &:hover {
+        @apply border-gray-600;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    background: #ea4c89;
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+    border-radius: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    height: 40px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.btn-link {
+    @apply text-center py-3 rounded-lg font-light text-lg w-full text-white bg-red-500;
+}
+
+input,
+textarea,
+select {
+    @apply rounded-sm py-5 font-light text-lg w-full text-left border border-gray-600 px-5 rounded;
+
+    &:focus {
+        @apply outline-none border-teal-500;
+    }
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+select {
+    height: 50px;
+}
+
+form {
+    .input {
+        @apply mb-3;
+    }
+
+    .input.has_error {
+        input {
+            @apply bg-red-200 border-red-700;
+
+            &:focus {
+                @apply bg-red-200 border-red-700;
+            }
+        }
+    }
+}
+
+@keyframes messageFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    5% {
+        opacity: 1;
+        transform: translateY(50px);
+    }
+
+    95% {
+        opacity: 1;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+
+.message {
+    animation: messageFadeIn 5s ease-in-out forwards;
+
+    &.error {
+        @apply bg-red-600;
+    }
+
+    &.info {
+        @apply bg-blue-500;
+    }
+
+    &.success {
+        @apply bg-green-500;
+    }
+
+    &.warning {
+        @apply bg-yellow-400;
+    }
+}
+
+.border-section {
+    @apply border-b border-gray-400 pb-8 mt-8;
+}
+
+.room--image {
+    opacity: 1;
+    background: transparent;
+    transition: -ms-transform 450ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s, -webkit-transform 450ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s, transform 450ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s !important;
+}
+
+.room--image.active {
+    transform: scale(1.05);
+}
+
+.room--image.inactive {
+    background: #000;
+    opacity: .8;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+}
+
+.cal-number {
+    @apply w-full text-center rounded p-1 cursor-pointer;
+}
+
+.header {
+    box-shadow: inset 0px -1px 0px #f3f3f4;
+}
+
+.main-nav li:hover .nav-dropdown {
+    display: flex;
+}
+
+.main-nav .links-container>li>a {
+    line-height: 80px;
+}
+
+.nav-dropdown {
+    display: none;
+    background-color: #fff;
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    top: 80px;
+    width: 100vw;
+    box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.1);
+
+    &>ul {
+        display: flex;
+        padding-left: 72px;
+    }
+
+    ul {
+        li.mega-nav-box {
+            width: 180px;
+            padding: 30px 8px;
+            flex-shrink: 0;
+
+            &:first-child {
+                margin-left: 30px;
+            }
+
+            img {
+                width: 140px;
+                height: 105px;
+                border-radius: 8px;
+                display: block;
+            }
+
+            .nav-quad-layout {
+                position: relative;
+                height: 105px;
+                width: 140px;
+
+                img.image-shadow {
+                    position: absolute;
+                    width: 67px;
+                    height: 50px;
+                    border-radius: 6px;
+                }
+
+                img:nth-of-type(2) {
+                    right: 0;
+                }
+
+                img:nth-of-type(3) {
+                    bottom: 0;
+                    left: 0;
+                }
+
+                img:nth-of-type(4) {
+                    bottom: 0;
+                    right: 0;
+                }
+            }
+
+            .mega-nav-copy {
+                padding-top: 15px;
+
+                .title {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: #0d0c22;
+                    padding-bottom: 7px;
+                }
+
+                .mega-description {
+                    font-size: 13px;
+                    line-height: 18px;
+                    display: inline-block;
+                }
+            }
+
+            .nav-tri-layout {
+                position: relative;
+                height: 105px;
+
+                img {
+                    width: 98px;
+                    height: 73px;
+                    position: absolute;
+                }
+
+                img:nth-of-type(2) {
+                    right: 0;
+                    top: 15px;
+                    z-index: -1;
+                }
+
+                img:nth-of-type(3) {
+                    bottom: 0;
+                    left: 20px;
+                    z-index: -2;
+                }
+            }
+        }
+    }
+
+    .textured-background {
+        background-image: url(https://dribbble.com/assets/updated_navigation/nav-background-2b1eca7639bcf174c7e05322bcfa9e7b6bb89beb3c97f9ec7266f1a1348208bf.png);
+        background-size: 754px 277px;
+        background-position: left;
+        background-repeat: no-repeat;
+        width: 100%;
+        display: block;
+    }
+}
+
+.nav-dropdown.for-designers-tabs {
+    .mega-nav-box {
+        margin-right: 70px;
+    }
+}
