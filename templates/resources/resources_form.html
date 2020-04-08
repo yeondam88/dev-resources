@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto py-24">
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input class="btn text-white" type="submit" value="Create">
+    </form>
+</div>
+{% endblock %}

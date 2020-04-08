@@ -1,6 +1,27 @@
 {% extends 'base.html' %}
 
 {% block  content %}
+<section class="dribbble_bg">
+    <div class="container mx-auto">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-4xl font-black leading-none">
+                    Discover the world's top <br />
+                    Resources for Developers
+                </h1>
+                <p>Dev resources is hte leading destination to find & read dev related work.</p>
+
+                <a href="{% url 'users:signup' %}" class="btn text-white mt-4">Sign up</a>
+            </div>
+            <div>
+                <img style="width: 510px; height: 360px;"
+                    src="https://cdn.dribbble.com/assets/art-banners/romainbriaux-9270a203743088cf36b939b04708d9a18fa794e04373964283a2d87c8f6fba0f.png"
+                    alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
 <section>
     <div class="lg:py-8 py-4 lg:px-8 px-4">
         <div class="flex items-start flex-wrap justify-between">
@@ -11,12 +32,15 @@
                 <div class="w-full bg-cover bg-center rounded-lg mb-3 object-cover"
                     style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
                 <div class="flex items-center">
-                    <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img src="{{ resource.author.avatar.url }}" alt=""></span>
+                    <span class="text-sm text-gray-600 block mr-2 small-thumbnail">
+                        <a href="/users/profile/{{resource.author.id}}"><img
+                                src="{{ resource.author.avatar.url }}" alt=""></a>
+                    </span>
                     <span class="text-black block">{{ resource.title }}</span>
                     <span class="flex flex-1 items-center">
                         <ul class="flex items-center">
                             {% for tag in resource.tags.all %}
-                                {% include 'mixins/badge.html' with tag=tag %}
+                            {% include 'mixins/badge.html' with tag=tag %}
                             {% endfor %}
                         </ul>
                     </span>

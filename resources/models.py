@@ -3,6 +3,7 @@ from django.db import models
 from core.models import TimeStampedModel
 from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
+from django.urls import reverse
 
 
 class AbstractItem(TimeStampedModel):
@@ -39,3 +40,6 @@ class Resources(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("core:home")

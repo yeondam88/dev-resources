@@ -86,3 +86,9 @@ class ResetPasswordConfirmView(PasswordResetConfirmView):
             "placeholder": "New password confirm"
         }
         return form
+
+
+class ProfileView(DetailView):
+
+    model = models.User
+    template_name = "users/profile.html"

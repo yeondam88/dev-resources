@@ -156,8 +156,9 @@
     </span>
     {% if user.is_authenticated %}
     <span class="flex items-center">
-        <li class="mr-6"><a href="{% url 'users:login' %}">Profile</a></li>
-        <li class="btn text-white mr-6"><a href="{% url 'users:signup' %}">Create</a></li>
+        {{ user.slug }}
+        <li class="mr-6"><a href="{% url 'users:profile' user.pk %}">Profile</a></li>
+        <li class="btn text-white mr-6"><a href="{% url 'resources:create' %}">Create</a></li>
         <li class="btn text-white mr-6"><a href="{% url 'users:logout' %}">Log out</a></li>
     </span>
     {% else %}
