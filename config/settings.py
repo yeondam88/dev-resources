@@ -137,3 +137,9 @@ AUTH_USER_MODEL = 'users.User'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 MEDIA_URL = "/media/"
+
+EMAIL_FROM = "support@sandboxaa3646432a134bffaae8c299018d1980.mailgun.org"
+
+
+# Auth
+LOGIN_URL = "/users/login"

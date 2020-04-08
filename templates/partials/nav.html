@@ -154,8 +154,16 @@
 
         </li>
     </span>
+    {% if user.is_authenticated %}
     <span class="flex items-center">
-        <li class="mr-6"><a href="">Sign in</a></li>
-        <li class="btn text-white mr-6"><a href="">Sign up</a></li>
+        <li class="mr-6"><a href="{% url 'users:login' %}">Profile</a></li>
+        <li class="btn text-white mr-6"><a href="{% url 'users:signup' %}">Create</a></li>
+        <li class="btn text-white mr-6"><a href="{% url 'users:logout' %}">Log out</a></li>
     </span>
+    {% else %}
+    <span class="flex items-center">
+        <li class="mr-6"><a href="{% url 'users:login' %}">Sign in</a></li>
+        <li class="btn text-white mr-6"><a href="{% url 'users:signup' %}">Sign up</a></li>
+    </span>
+    {% endif %}
 </ul>

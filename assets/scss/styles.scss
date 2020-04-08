@@ -75,6 +75,32 @@ body {
     text-align: center;
 }
 
+.auth-btn {
+    max-width: 200px;
+    width: 100%;
+    display: inline-block;
+    padding: 10px 16px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    background: #ea4c89;
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+    border-radius: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    height: 40px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
 .btn-link {
     @apply text-center py-3 rounded-lg font-light text-lg w-full text-white bg-red-500;
 }
@@ -312,5 +338,131 @@ form {
 .nav-dropdown.for-designers-tabs {
     .mega-nav-box {
         margin-right: 70px;
+    }
+}
+
+
+body.auth-base {
+    .main-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+
+        .auth-sidebar {
+            position: relative;
+            background-color: #f2d184;
+            color: #866118;
+            width: 514px;
+
+            .auth-sidebar-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+
+                header {
+                    padding: 64px 64px 30px;
+                    margin: 0;
+                    text-align: left;
+
+                    .logo {
+                        opacity: 0.7;
+                        margin-bottom: 30px;
+
+                        .dribbble-logo {
+                            fill: currentColor;
+                            color: inherit;
+                            width: 90px;
+                            height: auto;
+                        }
+                    }
+
+                    h1 {
+                        font-size: 32px;
+                        font-weight: bold;
+                    }
+                }
+
+                .artwork {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    flex-grow: 1;
+
+                    .artwork-image {
+                        max-height: 70%;
+                        flex-grow: 1;
+                        background-repeat: no-repeat;
+                        background-position: bottom center;
+                        background-size: cover;
+                    }
+                }
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: auto;
+            width: 100%;
+
+            .auth-nav {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                flex-grow: 0;
+                padding: 30px 30px 0;
+                position: relative;
+
+                p {
+                    margin: 0;
+                    flex-grow: 1;
+                    text-align: right;
+                }
+            }
+
+            main {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-grow: 1;
+                margin: 0;
+                padding: 0;
+
+                .auth-content {
+                    padding: 30px 60px 0;
+                    margin: 0;
+                    width: 100%;
+                    max-width: 416px;
+
+                    h2 {
+                        font-size: 24px;
+                        font-weight: bold;
+                        margin-bottom: 26px;
+                    }
+
+                    .input {
+                        display: flex;
+                        justify-content: space-between;
+
+                        input {
+                            line-height: 24px;
+                            font-weight: 400;
+                            width: 100%;
+                            height: 40px;
+                            padding: 10px 16px;
+                            outline: none;
+                            border-radius: 8px;
+                            -webkit-appearance: none;
+                            color: #0d0c22;
+                            background-color: #f3f3f4;
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

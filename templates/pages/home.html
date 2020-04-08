@@ -1,5 +1,30 @@
 {% extends 'base.html' %}
 
 {% block  content %}
-
+<section>
+    <div class="lg:py-8 py-4 lg:px-8 px-4">
+        <div class="flex items-start flex-wrap justify-between">
+        </div>
+        <ul class="resource-grid">
+            {% for resource in resources %}
+            <li>
+                <div class="w-full bg-cover bg-center rounded-lg mb-3 object-cover"
+                    style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
+                <div class="flex items-center">
+                    <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img src="{{ resource.author.avatar.url }}" alt=""></span>
+                    <span class="text-black block">{{ resource.title }}</span>
+                    <span class="flex flex-1 items-center">
+                        <ul class="flex items-center">
+                            {% for tag in resource.tags.all %}
+                                {% include 'mixins/badge.html' with tag=tag %}
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+</section>
 {% endblock  %}
