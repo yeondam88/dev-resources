@@ -1,7 +1,8 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, FormView
 from .models import Resources
+from . import forms
 from django.contrib import messages
 
 
@@ -10,20 +11,18 @@ class ResourceListView(ListView):
     model = Resources
 
 
-class ResourceCreationView(CreateView):
+class ResourceCreationView(FormView):
 
-    model = Resources
-    fields = [
-        "title",
-        "description",
-        "tags",
-        "resource_type",
-        "thumbnail"
-    ]
+    form_class = forms.ResourceForm
+    template_name = "resources/resources_create.html"
 
     def form_valid(self, form):
+        user = self.request.user
+        tags = form.cleaned_data.get("tags")
         resource = form.save()
-        resource.author = self.request.user
+        resource.author = user
         resource.save()
-        messages.success(self.request, "Resource created!")
+        for tag in tags:
+            resource.tags.add(tag)
+        resource.save()
         return redirect(reverse("core:home"))

@@ -4,4 +4,4 @@ from . import models
 
 @admin.register(models.Resources)
 class ResourcesAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("title", "created")

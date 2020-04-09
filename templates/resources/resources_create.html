@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="max-w-3xl mx-auto py-20">
+        <h1 class="font-bold text-3xl py-4">Create a resource</h1>
+        <form method="POST" class="w-full py-8" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <span class="text-red-700 font-medium text-sm">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+
+            {% for field in form %}
+                {% include 'mixins/auth/form_input.html' with field=field displayLabel=True %}
+            {% endfor %}
+
+            <button class="auth-btn text-white mt-8">Create</button>
+        </form>
+    </div>
+{% endblock content %}
