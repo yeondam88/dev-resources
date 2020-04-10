@@ -510,3 +510,27 @@ body.auth-base {
         border: none;
     }
 }
+
+.search-input-wrapper svg {
+    position: absolute;
+    left: 10px;
+    top: 32px;
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.search-input {
+    width: 160px;
+    margin-right: 10px;
+    color: #6e6d7a;
+    padding: 0 8px 0 35px;
+    border: none;
+    overflow: hidden;
+    background-color: #f3f3f4;
+    border-radius: 8px;
+    height: 40px;
+    line-height: 24px;
+    outline: none;
+    font-size: 14px;
+}
