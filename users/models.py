@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -14,11 +15,11 @@ class User(AbstractUser):
     )
 
     JOB_TITLES = (
-        ('software_engineer', 'Software Engineer'),
-        ('frontend_engineer', 'Front End Engineer'),
-        ('backend_engineer', 'Back End Engineer'),
-        ('graphic_designer', 'Graphic Designer'),
-        ('ux_designer', 'UX Designer'),
+        ('software engineer', 'Software Engineer'),
+        ('frontend engineer', 'Front End Engineer'),
+        ('backend engineer', 'Back End Engineer'),
+        ('graphic designer', 'Graphic Designer'),
+        ('ux designer', 'UX Designer'),
     )
 
     avatar = models.ImageField(null=True, blank=True, upload_to="avatars")
@@ -32,3 +33,6 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("users:profile", kwargs={"pk": self.pk})
+
+    def get_full_name(self):
+        return self.first_name + ' ' + self.last_name

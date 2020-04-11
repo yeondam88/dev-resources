@@ -165,10 +165,18 @@
     </span>
     {% if user.is_authenticated %}
     <span class="flex items-center">
-        {{ user.slug }}
-        <li class="mr-6"><a href="{% url 'users:profile' user.pk %}">Profile</a></li>
+        <li class="mr-6 dropdown relative">
+            <a href="{% url 'users:profile' user.pk %}">
+                <img class="w-8 h-8 rounded-full" src="{{ user.avatar.url }}" alt="{{ user.first_name }}">
+            </a>
+            
+            <ul class="dropdown-menu tabs absolute hidden text-gray-700 pt-1">
+                <li class=""><a class="bg-white py-4 px-4 block whitespace-no-wrap rounded-t-md" href="{% url 'users:profile' user.pk %}">Profile</a></li>
+                <li class="rule"></li>
+                <li class=""><a class="bg-white py-4 px-4 block whitespace-no-wrap rounded-b-md" href="{% url 'users:logout' %}">Log out</a></li>
+            </ul>
+        </li>
         <li class="btn text-white mr-6"><a href="{% url 'resources:create' %}">Create</a></li>
-        <li class="btn text-white mr-6"><a href="{% url 'users:logout' %}">Log out</a></li>
     </span>
     {% else %}
     <span class="flex items-center">

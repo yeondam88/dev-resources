@@ -73,3 +73,17 @@ class SignUpForm(forms.ModelForm):
         user.username = email
         user.set_password(password)
         user.save()
+
+
+class EditProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = models.User
+        fields = (
+            'first_name',
+            'last_name',
+            'avatar',
+            'job_title',
+            'email',
+            'bio',
+        )

@@ -92,3 +92,13 @@ class ProfileView(DetailView):
 
     model = models.User
     template_name = "users/profile.html"
+
+
+class ProfileUpdateView(UpdateView):
+
+    model = models.User
+    form_class = forms.EditProfileForm
+    template_name = 'users/profile_edit.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user

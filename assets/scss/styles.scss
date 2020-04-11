@@ -51,13 +51,13 @@ body {
     }
 }
 
-.btn {
+@mixin btn($btn-color) {
     display: inline-block;
     padding: 10px 16px;
     cursor: pointer;
     border: none;
     text-decoration: none;
-    background: #ea4c89;
+    background: $btn-color;
     -webkit-transition: all 200ms ease;
     transition: all 200ms ease;
     border-radius: 8px;
@@ -75,30 +75,19 @@ body {
     text-align: center;
 }
 
+.btn {
+    @include btn(#ea4c89);
+}
+
+.btn-clear {
+    @include btn(transparent);
+    box-shadow: 0px 0px 0px 1px #e7e7e9 inset;
+}
+
 .auth-btn {
+    @include btn(#ea4c89);
     max-width: 200px;
     width: 100%;
-    display: inline-block;
-    padding: 10px 16px;
-    cursor: pointer;
-    border: none;
-    text-decoration: none;
-    background: #ea4c89;
-    -webkit-transition: all 200ms ease;
-    transition: all 200ms ease;
-    border-radius: 8px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    position: relative;
-    outline: none;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    height: 40px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align: center;
 }
 
 @mixin input {
@@ -514,7 +503,7 @@ body.auth-base {
 .search-input-wrapper svg {
     position: absolute;
     left: 10px;
-    top: 32px;
+    top: 12px;
     width: 16px;
     height: 16px;
     fill: currentColor;
@@ -533,4 +522,38 @@ body.auth-base {
     line-height: 24px;
     outline: none;
     font-size: 14px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu.tabs {
+    width: 245px;
+    z-index: 999;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 30px 0;
+    background-color: #fff;
+    position: absolute;
+    top: 40px;
+    margin-left: -110px;
+
+    li.rule {
+        border-bottom: 1px solid #dbdbdb;
+        margin: 13px 10px;
+        width: auto;
+    }
+}
+
+.dropdown-menu.tabs::before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -6px;
+    left: 120px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
 }
