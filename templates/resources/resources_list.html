@@ -12,7 +12,7 @@
                     style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
                 <div class="flex items-center">
                     <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img src="{{ resource.author.avatar.url }}" alt=""></span>
-                    <span class="text-black block">{{ resource.title }}</span>
+                    <span class="text-black block"><a href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</span></a>
                     <span class="flex flex-1 items-center">
                         <ul class="flex items-center">
                             {% for tag in resource.tags.all %}

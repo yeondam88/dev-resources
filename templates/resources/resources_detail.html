@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto max-w-5xl">
+    <h1>{{ resource.title }}</h1>
+    <img src="{{ resource.thumbnail }}" alt="">
+
+    {% for c in resource.comments.all %}
+    <div class="bg-gray-200 rounded shadow-sm p-8">
+        <div class="text-grey-dark leading-normal text-sm">
+            <p>{{ c.comment }}</p>
+            <div class="flex items-center"><span><img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt=""></span>{{c.user.get_full_name}} <span class="mx-1 text-xs">&bull;</span> {{ c.created}}</div>
+        </div>
+    </div>
+        
+    {% endfor %}
+</div>
+{% endblock content %}

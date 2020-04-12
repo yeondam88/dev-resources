@@ -34,7 +34,11 @@
                         <a href="/users/profile/{{resource.author.id}}"><img
                                 src="{{ resource.author.avatar.url }}" alt=""></a>
                     </span>
-                    <span class="text-black block">{{ resource.title }}</span>
+                    <span class="text-black block">
+                        <a href="{% url 'resources:detail' resource.slug %}">
+                            {{ resource.title }}
+                        </a>
+                    </span>
                     <span class="flex flex-1 items-center">
                         <ul class="flex items-center">
                             {% for tag in resource.tags.all %}

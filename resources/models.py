@@ -38,6 +38,10 @@ class Resources(TimeStampedModel):
                          null=True,
                          unique=True, always_update=False, populate_from="title")
 
+    def get_all_comments(self):
+        all_comments = self.comments.all().count()
+        return all_comments
+
     def __str__(self):
         return self.title
 

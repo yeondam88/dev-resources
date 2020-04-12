@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView, FormView
+from django.views.generic import ListView, CreateView, FormView, DetailView
 from .models import Resources
 from . import forms
 from django.contrib import messages
@@ -26,3 +26,9 @@ class ResourceCreationView(FormView):
             resource.tags.add(tag)
         resource.save()
         return redirect(reverse("core:home"))
+
+
+class ResourceDetailView(DetailView):
+
+    model = Resources
+    context_object_name = 'resource'
