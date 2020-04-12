@@ -149,9 +149,6 @@
                 </ul>
                 <div class="textured-background"></div>
             </div>
-
-
-
         </li>
     </span>
     <span class="flex items-center relative search-input-wrapper">
@@ -163,11 +160,11 @@
         </svg>
         <input class="search-input" type="text" placeholder="Search">
     </span>
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <span class="flex items-center">
         <li class="mr-6 dropdown relative">
-            <a href="{% url 'users:profile' user.pk %}">
-                <img class="w-8 h-8 rounded-full" src="{{ user.avatar.url }}" alt="{{ user.first_name }}">
+            <a href="{% url 'users:profile' request.user.pk %}">
+                <img class="w-8 h-8 rounded-full" src="{{ request.user.avatar.url }}" alt="{{ user.first_name }}">
             </a>
             
             <ul class="dropdown-menu tabs absolute hidden text-gray-700 pt-1">
