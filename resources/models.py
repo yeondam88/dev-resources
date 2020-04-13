@@ -37,6 +37,8 @@ class Resources(TimeStampedModel):
     slug = AutoSlugField("Resource Address",
                          null=True,
                          unique=True, always_update=False, populate_from="title")
+    url = models.URLField(max_length=200, null=True)
+
 
     def get_all_comments(self):
         all_comments = self.comments.all().count()

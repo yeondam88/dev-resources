@@ -5,7 +5,6 @@ from .models import Resources
 from . import forms
 from django.contrib import messages
 
-
 class ResourceListView(ListView):
 
     model = Resources
@@ -19,12 +18,14 @@ class ResourceCreationView(FormView):
     def form_valid(self, form):
         user = self.request.user
         tags = form.cleaned_data.get("tags")
+        url = form.cleaned_data.get('url')
         resource = form.save()
         resource.author = user
         resource.save()
         for tag in tags:
             resource.tags.add(tag)
         resource.save()
+
         return redirect(reverse("core:home"))
 
 

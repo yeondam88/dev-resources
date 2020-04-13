@@ -1,18 +1,45 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block content %}
-<div class="container mx-auto max-w-5xl">
-    <h1>{{ resource.title }}</h1>
-    <img src="{{ resource.thumbnail }}" alt="">
+<section>
+    <div class="flex bg-white" style="height:600px;">
+        <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
+            <div>
+                <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">{{ resource.title }}</h2>
+                <div class="flex justify-between items-center">
+                        <span>
+                            <small>{{ resource.created|naturaltime }}</small>
+                        </span>
+                        <span class="flex items-center py-2">
+                            {% if resource.author.avatar %}
+                            <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
+                            {% endif %}
+                            <small>shared by {{ resource.author.get_full_name }}</small>
+                        </span>
+                </div>
+                <p class="mt-2 text-sm text-gray-500 md:text-base">{{ resource.description }}</p>
+                <div class="flex justify-center lg:justify-start mt-6">
+                    <a class="px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" href="{{ resource.url }}">Learn More</a>
+                </div>
 
-    {% for c in resource.comments.all %}
-    <div class="bg-gray-200 rounded shadow-sm p-8">
-        <div class="text-grey-dark leading-normal text-sm">
-            <p>{{ c.comment }}</p>
-            <div class="flex items-center"><span><img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt=""></span>{{c.user.get_full_name}} <span class="mx-1 text-xs">&bull;</span> {{ c.created}}</div>
+                {% for c in resource.comments.all %}
+                <div class="bg-gray-200 rounded shadow-sm p-8">
+                    <div class="text-grey-dark leading-normal text-sm">
+                        <p>{{ c.comment }}</p>
+                        <div class="flex items-center"><span><img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt=""></span>{{c.user.get_full_name}} <span class="mx-1 text-xs">&bull;</span> {{ c.created}}</div>
+                    </div>
+                </div>
+                    
+                {% endfor %}
+            </div>
+        </div>
+        <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">
+            <div class="h-full object-cover" style="background-image: url({{ resource.thumbnail }})">
+                <div class="h-full bg-black opacity-25"></div>
+            </div>
         </div>
     </div>
-        
-    {% endfor %}
-</div>
+</section>
+
 {% endblock content %}

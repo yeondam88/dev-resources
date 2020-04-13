@@ -1,6 +1,32 @@
 {% extends 'base.html' %}
 
+{% block page_title %}
+For Developer's resources
+{% endblock page_title %}
+
 {% block  content %}
+{% if request.user.is_authenticated %}
+<section class="{% if request.user.is_authenticated %}dribbble_bg{% else %}bg-white{% endif %}%">
+    <div class="container mx-auto">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-4xl font-black leading-none">
+                    Discover the world's top <br />
+                    Resources for Developers
+                </h1>
+                <p>Dev resources is hte leading destination to find & read dev related work.</p>
+
+                <a href="{% url 'resources:create' %}" class="btn text-white mt-4">Upload your resources</a>
+            </div>
+            <div>
+                <img style="width: 510px; height: 360px;"
+                    src="/media/images/dribbble-bg.jpg"
+                    alt="">
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
 <section class="dribbble_bg">
     <div class="container mx-auto">
         <div class="flex items-center justify-between">
@@ -21,6 +47,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 
 <section>
     <div class="lg:py-8 py-4 lg:px-8 px-4">

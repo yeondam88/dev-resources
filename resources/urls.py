@@ -5,6 +5,6 @@ app_name = "resources"
 
 urlpatterns = [
     path("", view=ResourceListView.as_view(), name='resources'),
-    path("<slug:slug>/", view=ResourceDetailView.as_view(), name="detail"),
     path("create/", view=ResourceCreationView.as_view(), name="create"),
+    path("<slug:slug>/", view=ResourceDetailView.as_view(), name="detail"),
 ]
