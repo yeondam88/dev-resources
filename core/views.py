@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import render, reverse, redirect
+from django.views.generic import ListView, View
 from resources.models import Resources
+from django.urls import reverse
 
 
 class IndexView(ListView):
@@ -15,3 +16,15 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class TagsFilterView(View):
+
+    def get(self, request, tag):
+        if tag:
+            resources = Resources.objects.filter(
+                tags__name=tag).order_by("-created")
+            if resources is not None:
+                return render(request, "resources/resource_tags_result.html", {'resources': resources})
+            else:
+                return redirect(reverse("core:home"))

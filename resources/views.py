@@ -5,9 +5,11 @@ from .models import Resources
 from . import forms
 from django.contrib import messages
 
+
 class ResourceListView(ListView):
 
     model = Resources
+    context_object_name = 'resources'
 
 
 class ResourceCreationView(FormView):
