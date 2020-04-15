@@ -36,11 +36,11 @@ class ResourceDetailView(DetailView):
 
     model = Resources
     context_object_name = 'resource'
+    template_name = 'resources/resources_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         slug = self.kwargs['slug']
-        print(slug)
         resource = Resources.objects.get(slug=slug)
         comments = Comments.objects.filter(
             parent__isnull=True, resource=resource)

@@ -22,7 +22,7 @@
                     </span>
                     <span class="flex items-center py-2">
                         {% if resource.author.avatar %}
-                        <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
+                            <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
                         {% endif %}
                         <small>shared by {{ resource.author.get_full_name }}</small>
                     </span>
@@ -35,7 +35,7 @@
 
                 <hr class="my-4">
 
-                <div class="py-4">
+                <div class="py-4 comments-container">
                     <form action="/comments/create/{{resource.slug}}/" method="POST">
                         {% csrf_token %}
                         <div class="flex">
@@ -45,9 +45,10 @@
                         </div>
                     </form>
 
-                    {% for c in comments %}
+                    
                     <div class="bg-white">
                         <div class="text-grey-dark leading-normal text-sm">
+                            {% for c in comments %}
                             <div class="my-2">
                                 <div class="flex items-center"><span><img class="w-6 h-6 rounded-full mr-2"
                                             src="{{c.user.avatar.url}}" alt=""></span>{{c.user.get_full_name}}</div>
@@ -73,7 +74,7 @@
                                         {% for reply in c.replies.all %}
                                             <div class="flex items-center">
                                                 <span>
-                                                    <img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt="">
+                                                    <img class="w-6 h-6 rounded-full mr-2" src="{{reply.user.avatar.url}}" alt="">
                                                 </span>
                                                 {{reply.user.get_full_name}}
                                             </div>
@@ -85,17 +86,16 @@
                                                     <span id="reply" class="text-xs text-gray-700 mr-2">Reply</span>
                                                     <span id="share" class="text-xs text-gray-700 mr-2">Shared</span>
                                                 </div>
-                                                </div>
                                             </div>
                                         {% endfor %}
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
+                </div>
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">
             <div class="h-full object-cover" style="background-image: url({{ resource.thumbnail }})">
