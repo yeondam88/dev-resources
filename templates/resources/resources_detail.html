@@ -50,8 +50,14 @@
                         <div class="text-grey-dark leading-normal text-sm">
                             {% for c in comments %}
                             <div class="my-2">
-                                <div class="flex items-center"><span><img class="w-6 h-6 rounded-full mr-2"
-                                            src="{{c.user.avatar.url}}" alt=""></span>{{c.user.get_full_name}}</div>
+                                <div class="flex items-center"><span>
+                                    {% if c.user.avatar %}
+                                    <img class="w-6 h-6 rounded-full mr-2"
+                                            src="{{c.user.avatar.url}}" alt="">
+                                    {% else %}
+                                    <img class="w-6 h-6 rounded-full" src="https://api.adorable.io/avatars/60/abott@adorable.png" alt="Placeholder image">
+                                    {% endif %}
+                                    </span>{{c.user.get_full_name}}</div>
                                 <div class="border-gray-300 pl-4 py-2" style="margin-left: 0.6rem; border-left: 3px solid #f3f3f3;">
                                     <p>{{ c.comment }}</p>
                                     <small>{{ c.created|naturaltime }}</small>
@@ -74,7 +80,12 @@
                                         {% for reply in c.replies.all %}
                                             <div class="flex items-center">
                                                 <span>
-                                                    <img class="w-6 h-6 rounded-full mr-2" src="{{reply.user.avatar.url}}" alt="">
+                                                    {% if reply.user.avatar %}
+                                                    <img class="w-6 h-6 rounded-full mr-2"
+                                                            src="{{reply.user.avatar.url}}" alt="">
+                                                    {% else %}
+                                                    <img class="w-6 h-6 rounded-full" src="https://api.adorable.io/avatars/60/abott@adorable.png" alt="Placeholder image">
+                                                    {% endif %}
                                                 </span>
                                                 {{reply.user.get_full_name}}
                                             </div>
