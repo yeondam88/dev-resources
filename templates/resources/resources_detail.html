@@ -45,7 +45,7 @@
                         </div>
                     </form>
 
-                    {% for c in resource.comments.all %}
+                    {% for c in comments %}
                     <div class="bg-white">
                         <div class="text-grey-dark leading-normal text-sm">
                             <div class="my-2">
@@ -53,12 +53,46 @@
                                             src="{{c.user.avatar.url}}" alt=""></span>{{c.user.get_full_name}}</div>
                                 <div class="border-gray-300 pl-4 py-2" style="margin-left: 0.6rem; border-left: 3px solid #f3f3f3;">
                                     <p>{{ c.comment }}</p>
-                                    <small>{{ c.created|naturaltime }}</small>        
+                                    <small>{{ c.created|naturaltime }}</small>
+                                    <div>
+                                        <span id="upvote" class="text-xs text-gray-700 mr-2">Upvote (11)</span>
+                                        <span id="reply" class="text-xs text-gray-700 mr-2">Reply</span>
+                                        <span id="share" class="text-xs text-gray-700 mr-2">Shared</span>
+                                    </div>
+                                    <div class="mt-2 hidden replyForm">
+                                        <form action="/comments/create/{{resource.slug}}/" method="POST">
+                                            {% csrf_token %}
+                                            <div class="flex">
+                                                <input type="hidden" name="parent_id" value="{{ c.id }}">
+                                                <input class="border-1" type="text" name="comment" placeholder="comment" style="height: 32px; padding: 5px;">
+                                                <input class="ml-2 text-center border-none w-24 h-8 bg-pink-400 text-white rounded-md" type="submit" value="Reply">
+                                            </div>
+                                        </form>
+                                    </div> 
+                                    <div class="mt-2">
+                                        {% for reply in c.replies.all %}
+                                            <div class="flex items-center">
+                                                <span>
+                                                    <img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt="">
+                                                </span>
+                                                {{reply.user.get_full_name}}
+                                            </div>
+                                            <div class="border-gray-300 pl-4 py-2" style="margin-left: 0.6rem; border-left: 3px solid #f3f3f3;">
+                                                <p>{{ reply.comment }}</p>
+                                                <small>{{ reply.created|naturaltime }}</small>
+                                                <div>
+                                                    <span id="upvote" class="text-xs text-gray-700 mr-2">Upvote (11)</span>
+                                                    <span id="reply" class="text-xs text-gray-700 mr-2">Reply</span>
+                                                    <span id="share" class="text-xs text-gray-700 mr-2">Shared</span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     {% endfor %}
                 </div>
             </div>
@@ -70,5 +104,17 @@
         </div>
     </div>
 </section>
+
+<script>
+    const replyForm = document.querySelector('.replyForm');
+    const replyBtns = document.querySelectorAll('#reply');
+
+    replyBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.parentElement.nextElementSibling.classList.toggle('hidden');
+        });
+    });
+
+</script>
 
 {% endblock content %}

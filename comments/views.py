@@ -14,8 +14,24 @@ def create_comment(request, slug):
         if not resource:
             return redirect(reverse("core:home"))
         if form.is_valid():
+            parent_obj = None
+            try:
+                parent_id = int(request.POST.get('parent_id'))
+            except:
+                parent_id = None
+            if parent_id:
+                parent_obj = Comments.objects.get(id=parent_id)
+                if parent_obj:
+                    reply_comment = form.save()
+                    reply_comment.parent = parent_obj
+
             comment = form.save()
             comment.resource = resource
             comment.user = request.user
             comment.save()
             return redirect(reverse("resources:detail", kwargs={"slug": resource.slug}))
+
+    else:
+        form = CommentForm()
+
+    return redirect(reverse("core:home"))

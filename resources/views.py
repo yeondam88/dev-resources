@@ -2,6 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, FormView, DetailView
 from .models import Resources
+from comments.models import Comments
 from . import forms
 from django.contrib import messages
 
@@ -35,3 +36,13 @@ class ResourceDetailView(DetailView):
 
     model = Resources
     context_object_name = 'resource'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        slug = self.kwargs['slug']
+        print(slug)
+        resource = Resources.objects.get(slug=slug)
+        comments = Comments.objects.filter(
+            parent__isnull=True, resource=resource)
+        context['comments'] = comments
+        return context
