@@ -39,7 +39,9 @@
                     <form action="/comments/create/{{resource.slug}}/" method="POST">
                         {% csrf_token %}
                         <div class="flex">
-                            <img class="w-8 h-8 rounded-full mr-2" src="{{resource.author.avatar.url}}" alt="">
+                            {% if request.user.avatar %}
+                                <img class="w-8 h-8 rounded-full mr-2" src="{{request.user.avatar.url}}" alt="">
+                            {% endif %}
                             <input class="border-1" type="text" name="comment" placeholder="comment" style="height: 32px; padding: 5px;">
                             <input class="ml-2 text-center border-none w-24 h-8 bg-pink-400 text-white rounded-md" type="submit" value="submit">
                         </div>
