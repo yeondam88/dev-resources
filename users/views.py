@@ -15,6 +15,8 @@ from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, UpdateView
 from . import forms, mixins, models
+from django.core.paginator import Paginator
+from resources.models import Resources
 
 
 class LoginView(mixins.LoggedOutOnlyView, FormView):
@@ -92,6 +94,22 @@ class ProfileView(DetailView):
 
     model = models.User
     template_name = "users/profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = models.User.objects.get(id=self.kwargs['pk'])
+        resources = self.get_related_resources(user)
+        print(resources)
+        context['resources'] = resources
+        context['page_obj'] = resources
+        return context
+
+    def get_related_resources(self, user):
+        queryset = Resources.objects.filter(author=user).order_by('-created')
+        paginator = Paginator(queryset, 4)
+        page = self.request.GET.get('page')
+        resources = paginator.get_page(page)
+        return resources
 
 
 class ProfileUpdateView(UpdateView):

@@ -39,7 +39,6 @@ class Resources(TimeStampedModel):
                          unique=True, always_update=False, populate_from="title")
     url = models.URLField(max_length=200, null=True)
 
-
     def get_all_comments(self):
         all_comments = self.comments.all().count()
         return all_comments
@@ -48,4 +47,4 @@ class Resources(TimeStampedModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("core:home")
+        return reverse('resources:detail', kwargs={'slug': self.slug})

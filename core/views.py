@@ -10,7 +10,7 @@ class IndexView(ListView):
     template_name = 'pages/home.html'
     paginate_by = 6
     paginate_orphans = 5
-    ordering = "created"
+    ordering = ["-created"]
     context_object_name = "resources"
 
     def get_context_data(self, **kwargs):

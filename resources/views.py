@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView, FormView, DetailView
+from django.views.generic import ListView, CreateView, FormView, DetailView, UpdateView
 from .models import Resources
 from comments.models import Comments
 from . import forms
@@ -46,3 +46,16 @@ class ResourceDetailView(DetailView):
             parent__isnull=True, resource=resource)
         context['comments'] = comments
         return context
+
+
+class ResourceUpdateView(UpdateView):
+
+    model = Resources
+    template_name = 'resources/resources_update.html'
+    fields = (
+        'title',
+        'description',
+        'thumbnail',
+        'url',
+        'tags'
+    )

@@ -32,31 +32,56 @@
 </section>
 
 <section>
-    {% if user.resources.all|length > 0 %}
-    <div class="lg:py-8 py-4 lg:px-8 px-4">
-        <ul class="resource-grid">
-            {% for resource in user.resources.all %}
-            <li>
-                <div class="w-full bg-cover bg-center rounded-lg mb-3 object-cover"
-                    style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
-                <div class="flex items-center">
-                    <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img
-                            src="{{ resource.author.avatar.url }}" alt=""></span>
-                    <span class="text-black block">{{ resource.title }}</span>
-                    <span class="flex flex-1 items-center">
-                        <ul class="flex items-center">
-                            {% for tag in resource.tags.all %}
-                            {% include 'mixins/badge.html' with tag=tag %}
-                            {% endfor %}
-                        </ul>
-                    </span>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
+    <div class="container mx-auto py-12">
+        {% if resources|length > 0 %}
+        <div class="lg:py-8 py-4 lg:px-8 px-4">
+            <ul class="resource-grid">
+                {% for resource in resources %}
+                <li>
+                    <div class="w-full bg-cover bg-center rounded-lg mb-3 object-cover"
+                        style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
+                    <div class="flex items-center">
+                        <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img
+                                src="{{ resource.author.avatar.url }}" alt=""></span>
+                        <span class="text-black block"><a href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</a></span>
+                        <span class="flex flex-1 items-center">
+                            <ul class="flex items-center">
+                                {% for tag in resource.tags.all %}
+                                    {% include 'mixins/badge.html' with tag=tag %}
+                                {% endfor %}
+                            </ul>
+                        </span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <p>Nothing to show..</p>
+        {% endif %}
+        <div class="flex items-center mx-auto justify-center container py-12">
+            <ul class="flex">
+                {% if page_obj.has_previous %}
+                <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-500 rounded-lg">
+                    <a class="flex items-center font-bold" href="?page={{page_obj.previous_page_number}}">
+                        <span class="mx-1">previous</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for pg in page_obj.paginator.page_range %}
+                    <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                        <a class="font-bold" href="?page={{pg}}">{{ pg }}</a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                    <a class="flex items-center font-bold" href="?page={{page_obj.next_page_number}}">
+                        <span class="mx-1">Next</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-    {% else %}
-    <p>Nothing to show..</p>
-    {% endif %}
 </section>
 {% endblock content %}

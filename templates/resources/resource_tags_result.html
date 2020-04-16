@@ -1,28 +1,33 @@
 {% extends 'base.html' %}
+{% load string_tags %}
 
 {% block content %}
 <section>
-    <h1>tags {{ request.GET.tag }}</h1>
-    <div class="lg:py-8 py-4 lg:px-8 px-4">
-        <ul class="resource-grid">
-            {% for resource in resources %}
-            <li>
-                <div class="w-full bg-cover bg-center rounded-lg mb-3 object-cover"
-                    style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
-                <div class="flex items-center">
-                    <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img src="{{ resource.author.avatar.url }}" alt=""></span>
-                    <span class="text-black block"><a href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</span></a>
-                    <span class="flex flex-1 items-center">
-                        <ul class="flex items-center">
-                            {% for tag in resource.tags.all %}
+    <div class="container mx-auto py-24">
+        <h1>tags - {% extract_tag_name request.path %}</h1>
+        <div class="lg:py-8 py-4">
+            <ul class="resource-grid">
+                {% for resource in resources %}
+                <li>
+                    <div class="w-full bg-cover bg-center rounded-lg mb-3 object-cover"
+                        style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
+                    <div class="flex items-center">
+                        <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img
+                                src="{{ resource.author.avatar.url }}" alt=""></span>
+                        <span class="text-black block"><a
+                                href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</span></a>
+                        <span class="flex flex-1 items-center">
+                            <ul class="flex items-center">
+                                {% for tag in resource.tags.all %}
                                 {% include 'mixins/badge.html' with tag=tag %}
-                            {% endfor %}
-                        </ul>
-                    </span>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
+                                {% endfor %}
+                            </ul>
+                        </span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </section>
 
