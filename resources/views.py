@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView, FormView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, FormView, DetailView, UpdateView, View
 from .models import Resources
 from comments.models import Comments
 from . import forms
