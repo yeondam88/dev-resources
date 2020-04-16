@@ -32,6 +32,10 @@
                 <div class="auth-form signup-form">
                     {% include 'mixins/auth/auth_form.html' with form=form cta="Sign in"%}
                 </div>
+
+                <div class="mt-4">
+                    <p>Need an account ? <a href="{% url 'users:signup' %}">Sign up</a></p>
+                </div>
             </div>
         </main>
     </section>
