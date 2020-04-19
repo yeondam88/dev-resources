@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from autoslug import AutoSlugField
 
 
 class User(AbstractUser):
@@ -30,9 +31,12 @@ class User(AbstractUser):
     bio = models.TextField(default='', blank=True)
     email_verified = models.BooleanField(default=False)
     email_secret = models.CharField(max_length=20, default="", blank=True)
+    slug = AutoSlugField("Username",
+                         null=True,
+                         unique=True, always_update=False, populate_from="username")
 
     def get_absolute_url(self):
-        return reverse("users:profile", kwargs={"pk": self.pk})
+        return reverse("users:profile", kwargs={"slug": self.slug})
 
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name

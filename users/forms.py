@@ -32,11 +32,12 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = models.User
-        fields = ("first_name", "last_name", "email",)
+        fields = ("first_name", "last_name", "email", "username",)
         widgets = {
             "first_name": forms.TextInput(attrs={"placeholder": "First Name"}),
             "last_name": forms.TextInput(attrs={"placeholder": "Last Name"}),
             "email": forms.EmailInput(attrs={"Placeholder": "Email"}),
+            "username": forms.TextInput(attrs={"Placeholder": "Username"}),
         }
 
     password = forms.CharField(
@@ -66,11 +67,21 @@ class SignUpForm(forms.ModelForm):
             validate_password(self.cleaned_data.get("password"), self.instance)
             return password
 
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        try:
+            models.User.objects.get(username=username)
+            raise forms.ValidationError(
+                "That username is already taken!", code="exisiting_user"
+            )
+        except models.User.DoesNotExist:
+            return username
+
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
-        user.username = email
+        user.username = self.cleaned_data.get("username")
         user.set_password(password)
         user.save()
 

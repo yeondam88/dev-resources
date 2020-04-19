@@ -11,12 +11,15 @@
                 <div class="w-full bg-cover bg-center rounded-lg mb-3 object-cover"
                     style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
                 <div class="flex items-center">
-                    <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img src="{{ resource.author.avatar.url }}" alt=""></span>
-                    <span class="text-black block"><a href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</span></a>
+                    <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><a
+                            href="{% url 'user:profile' resource.author.slug %}"><img
+                                src="{{ resource.author.avatar.url }}" alt=""></a></span>
+                    <span class="text-black block"><a
+                            href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</span></a>
                     <span class="flex flex-1 items-center">
                         <ul class="flex items-center">
                             {% for tag in resource.tags.all %}
-                                {% include 'mixins/badge.html' with tag=tag %}
+                            {% include 'mixins/badge.html' with tag=tag %}
                             {% endfor %}
                         </ul>
                     </span>

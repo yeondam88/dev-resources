@@ -27,7 +27,8 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=email, password=password)
+        user = authenticate(self.request, email=email, password=password)
+        print(user)
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
@@ -97,7 +98,7 @@ class ProfileView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = models.User.objects.get(id=self.kwargs['pk'])
+        user = models.User.objects.get(slug=self.kwargs['slug'])
         resources = self.get_related_resources(user)
         print(resources)
         context['resources'] = resources

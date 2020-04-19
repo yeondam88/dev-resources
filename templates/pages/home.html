@@ -19,9 +19,7 @@ For Developer's resources
                 <a href="{% url 'resources:create' %}" class="btn text-white mt-4">Upload your resources</a>
             </div>
             <div>
-                <img style="width: 510px; height: 360px;"
-                    src="/media/images/dribbble-bg.jpg"
-                    alt="">
+                <img style="width: 510px; height: 360px;" src="/media/images/dribbble-bg.jpg" alt="">
             </div>
         </div>
     </div>
@@ -58,7 +56,7 @@ For Developer's resources
                     style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
                 <div class="flex items-center">
                     <span class="text-sm text-gray-600 block mr-2 small-thumbnail">
-                        <a href="/users/profile/{{resource.author.id}}"><img
+                        <a href="/users/profile/@{{ resource.author.username }}/"><img
                                 src="{{ resource.author.avatar.url }}" alt=""></a>
                     </span>
                     <span class="text-black block">
@@ -69,7 +67,7 @@ For Developer's resources
                     <span class="flex flex-1 items-center">
                         <ul class="flex items-center">
                             {% for tag in resource.tags.all %}
-                                {% include 'mixins/badge.html' with tag=tag %}
+                            {% include 'mixins/badge.html' with tag=tag %}
                             {% endfor %}
                         </ul>
                     </span>
@@ -88,9 +86,9 @@ For Developer's resources
             </li>
             {% endif %}
             {% for pg in page_obj.paginator.page_range %}
-                <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
-                    <a class="font-bold" href="?page={{pg}}">{{ pg }}</a>
-                </li>
+            <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                <a class="font-bold" href="?page={{pg}}">{{ pg }}</a>
+            </li>
             {% endfor %}
             {% if page_obj.has_next %}
             <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
