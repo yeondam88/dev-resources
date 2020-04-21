@@ -11,11 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import environ
 
-root = environ.Path(__file__) - 3
-env = environ.Env()
-environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -96,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dev_resource',
-        'USER': env.str('DB_USERNAME'),
-        'PASSWORD': env.str('DB_PASSWORD'),
+        'USER': 'dbadmin',
+        'PASSWORD': 'password',
         'HOST': 'localhost'
     }
 }
@@ -139,12 +135,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "config/static")]
 
 AUTH_USER_MODEL = 'users.User'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 EMAIL_FROM = "support@sandboxaa3646432a134bffaae8c299018d1980.mailgun.org"
@@ -152,3 +149,10 @@ EMAIL_FROM = "support@sandboxaa3646432a134bffaae8c299018d1980.mailgun.org"
 
 # Auth
 LOGIN_URL = "/users/login"
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
