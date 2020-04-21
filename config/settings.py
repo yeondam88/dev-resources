@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(#!ie7agqkj7h=cvg74$++(5ebv%3n2&nbpr#0quipglsrf9(i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['206.189.172.53', 'localhost']
 
@@ -90,11 +90,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dev_resource',
-        'USER': 'dbadmin',
-        'PASSWORD': 'password',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite'),
     }
 }
 
@@ -155,4 +152,3 @@ try:
     from .local_settings import *
 except ImportError:
     pass
-

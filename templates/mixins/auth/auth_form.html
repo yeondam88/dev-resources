@@ -1,14 +1,14 @@
-<form method="POST" class="w-full" enctype="multipart/form-data">
+<form action='.' method="POST" class="w-full" enctype="multipart/form-data">
     {% csrf_token %}
 
     {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-            <span class="text-red-700 font-medium text-sm">{{ error }}</span>
-        {% endfor %}
+    {% for error in form.non_field_errors %}
+    <span class="text-red-700 font-medium text-sm">{{ error }}</span>
+    {% endfor %}
     {% endif %}
 
     {% for field in form %}
-        {% include 'mixins/auth/form_input.html' with field=field %}
+    {% include 'mixins/auth/form_input.html' with field=field %}
     {% endfor %}
 
     <button class="auth-btn text-white">{{ cta }}</button>
