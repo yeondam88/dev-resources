@@ -13,6 +13,7 @@ class UserAdmin(UserAdmin):
                 'avatar',
                 'gender',
                 'job_title',
+                'default_avatar_img_field',
             ),
         }),
     )
