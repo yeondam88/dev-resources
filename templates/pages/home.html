@@ -56,8 +56,17 @@ For Developer's resources
                     style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
                 <div class="flex items-center">
                     <span class="text-sm text-gray-600 block mr-2 small-thumbnail">
-                        <a href="/users/profile/@{{ resource.author.username }}/"><img
-                                src="{{ resource.author.avatar.url }}" alt=""></a>
+                        <a href="/users/profile/@{{ resource.author.username }}/">
+                            {% if resource.author.avatar %}
+                            <img src="{{ resource.author.avatar.url }}" alt="">
+                            {% elif user.default_avatar_img_url %}
+                            <img class="w-8 h-8 rounded-full" src="{{ user.default_avatar_img_url }}"
+                                alt="{{ user.first_name }}">
+                            {% else %}
+                            <img class="w-8 h-8 rounded-full"
+                                src="https://api.adorable.io/avatars/60/abott@adorable.png" alt="Placeholder image">
+                            {% endif %}
+                        </a>
                     </span>
                     <span class="text-black block">
                         <a href="{% url 'resources:detail' resource.slug %}">

@@ -23,6 +23,7 @@ class User(AbstractUser):
         ('ux designer', 'UX Designer'),
     )
 
+    default_avatar_img_url = models.URLField(max_length=255, null=True)
     avatar = models.ImageField(null=True, blank=True, upload_to="avatars")
     gender = models.CharField(max_length=10, null=True,
                               choices=GENDER_CHOICES, blank=True)

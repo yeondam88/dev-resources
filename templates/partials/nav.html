@@ -172,6 +172,8 @@
             <a href="/users/profile/@{{user.slug}}">
                 {% if user.avatar %}
                     <img class="w-8 h-8 rounded-full" src="{{ user.avatar.url }}" alt="{{ user.first_name }}">
+                {% elif user.default_avatar_img_url %}
+                    <img class="w-8 h-8 rounded-full" src="{{ user.default_avatar_img_url }}" alt="{{ user.first_name }}">
                 {% else %}
                     <img class="w-8 h-8 rounded-full" src="https://api.adorable.io/avatars/60/abott@adorable.png" alt="Placeholder image">
                 {% endif %}

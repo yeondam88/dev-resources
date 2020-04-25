@@ -1,7 +1,24 @@
+import random
 from django import forms
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.password_validation import validate_password
 from . import models
+
+
+AVATARS_CHOICES = [
+    'male',
+    'female',
+    'human',
+    'identicon',
+    'initials',
+    'bottts',
+    'avataaars',
+    'jdenticon',
+    'gridy',
+    'code',
+]
+
+AVATAR_URL_PREFIX = 'https://avatars.dicebear.com/v2/'
 
 
 class LoginForm(forms.Form):
@@ -81,6 +98,9 @@ class SignUpForm(forms.ModelForm):
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
+        user.default_avatar_img_url = AVATAR_URL_PREFIX + \
+            random.choice(AVATARS_CHOICES) + '/' + \
+            self.cleaned_data.get('first_name')
         user.username = email
         user.set_password(password)
         user.save()
