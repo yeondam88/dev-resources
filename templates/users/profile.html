@@ -6,11 +6,13 @@
         <div class="max-w-3xl mx-auto flex justify-center items-center">
             <div class="flex justify-center py-8">
                 {% if user.avatar %}
-                    <img class="avatar rounded-full" src="{{ user.avatar.url }}" alt="">
+                <img class="avatar rounded-full" src="{{ user.avatar.url }}" alt="">
+                {% elif user.default_avatar_img_url %}
+                <img class="w-8 h-8 rounded-full" src="{{ user.default_avatar_img_url }}" alt="{{ user.first_name }}">
                 {% else %}
-                    <img class="avatar rounded-full" src="https://api.adorable.io/avatars/120/abott@adorable.png" alt="">
+                <img class="avatar rounded-full" src="https://api.adorable.io/avatars/120/abott@adorable.png" alt="">
                 {% endif %}
-                
+
             </div>
             <div class="ml-4">
                 <div class="flex w-full flex-col mb-4">
@@ -48,11 +50,12 @@
                     <div class="flex items-center">
                         <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><img
                                 src="{{ resource.author.avatar.url }}" alt=""></span>
-                        <span class="text-black block"><a href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</a></span>
+                        <span class="text-black block"><a
+                                href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</a></span>
                         <span class="flex flex-1 items-center">
                             <ul class="flex items-center">
                                 {% for tag in resource.tags.all %}
-                                    {% include 'mixins/badge.html' with tag=tag %}
+                                {% include 'mixins/badge.html' with tag=tag %}
                                 {% endfor %}
                             </ul>
                         </span>
@@ -74,9 +77,9 @@
                 </li>
                 {% endif %}
                 {% for pg in page_obj.paginator.page_range %}
-                    <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
-                        <a class="font-bold" href="?page={{pg}}">{{ pg }}</a>
-                    </li>
+                <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">
+                    <a class="font-bold" href="?page={{pg}}">{{ pg }}</a>
+                </li>
                 {% endfor %}
                 {% if page_obj.has_next %}
                 <li class="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg">

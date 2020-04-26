@@ -10,11 +10,11 @@
                     <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">{{ resource.title }}</h2>
                     <div class="flex">
                         {% for tag in resource.tags.all %}
-                            {% include 'mixins/badge.html' with tag=tag %}
+                        {% include 'mixins/badge.html' with tag=tag %}
                         {% endfor %}
                     </div>
-                        
-                       
+
+
                 </div>
                 <div class="flex justify-between items-center">
                     <span>
@@ -22,7 +22,10 @@
                     </span>
                     <span class="flex items-center py-2">
                         {% if resource.author.avatar %}
-                            <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
+                        <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
+                        {% elif resource.author.default_avatar_img_url %}
+                        <img class="w-8 h-8 rounded-full" src="{{ resource.author.default_avatar_img_url }}"
+                            alt="{{ resource.author.first_name }}">
                         {% endif %}
                         <small>shared by {{ resource.author.get_full_name }}</small>
                     </span>
@@ -35,7 +38,7 @@
                     {% if resource.author == request.user %}
                     <a class="ml-2 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400"
                         href="{% url 'resources:update' resource.slug %}">Update Post</a>
-                    {% endif %}    
+                    {% endif %}
                 </div>
 
                 <hr class="my-4">
@@ -46,28 +49,38 @@
                         {% csrf_token %}
                         <div class="flex">
                             {% if user.avatar %}
-                                <img class="w-8 h-8 rounded-full mr-2" src="{{user.avatar.url}}" alt="">
+                            <img class="w-8 h-8 rounded-full mr-2" src="{{user.avatar.url}}" alt="">
+                            {% elif user.default_avatar_img_url %}
+                            <img class="w-8 h-8 rounded-full" src="{{ user.default_avatar_img_url }}"
+                                alt="{{ user.first_name }}">
                             {% endif %}
-                            <input class="border-1" type="text" name="comment" placeholder="comment" style="height: 32px; padding: 5px;">
-                            <input class="ml-2 text-center border-none w-24 h-8 bg-pink-400 text-white rounded-md" type="submit" value="submit">
+                            <input class="border-1" type="text" name="comment" placeholder="comment"
+                                style="height: 32px; padding: 5px;">
+                            <input class="ml-2 text-center border-none w-24 h-8 bg-pink-400 text-white rounded-md"
+                                type="submit" value="submit">
                         </div>
                     </form>
                     {% endif %}
 
-                    
+
                     <div class="bg-white">
                         <div class="text-grey-dark leading-normal text-sm">
                             {% for c in comments %}
                             <div class="my-2">
                                 <div class="flex items-center"><span>
-                                    {% if c.user.avatar %}
-                                    <img class="w-6 h-6 rounded-full mr-2"
-                                            src="{{c.user.avatar.url}}" alt="">
-                                    {% else %}
-                                    <img class="w-6 h-6 rounded-full" src="https://api.adorable.io/avatars/60/abott@adorable.png" alt="Placeholder image">
-                                    {% endif %}
+                                        {% if c.user.avatar %}
+                                        <img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt="">
+                                        {% elif c.user.default_avatar_img_url %}
+                                        <img class="w-8 h-8 rounded-full" src="{{ c.user.default_avatar_img_url }}"
+                                            alt="{{ c.user.first_name }}">
+                                        {% else %}
+                                        <img class="w-6 h-6 rounded-full"
+                                            src="https://api.adorable.io/avatars/60/abott@adorable.png"
+                                            alt="Placeholder image">
+                                        {% endif %}
                                     </span>{{c.user.get_full_name}}</div>
-                                <div class="border-gray-300 pl-4 py-2" style="margin-left: 0.6rem; border-left: 3px solid #f3f3f3;">
+                                <div class="border-gray-300 pl-4 py-2"
+                                    style="margin-left: 0.6rem; border-left: 3px solid #f3f3f3;">
                                     <p>{{ c.comment }}</p>
                                     <small>{{ c.created|naturaltime }}</small>
                                     {% if user.is_authenticated %}
@@ -81,36 +94,46 @@
                                             {% csrf_token %}
                                             <div class="flex">
                                                 <input type="hidden" name="parent_id" value="{{ c.id }}">
-                                                <input class="border-1" type="text" name="comment" placeholder="comment" style="height: 32px; padding: 5px;">
-                                                <input class="ml-2 text-center border-none w-24 h-8 bg-pink-400 text-white rounded-md" type="submit" value="Reply">
+                                                <input class="border-1" type="text" name="comment" placeholder="comment"
+                                                    style="height: 32px; padding: 5px;">
+                                                <input
+                                                    class="ml-2 text-center border-none w-24 h-8 bg-pink-400 text-white rounded-md"
+                                                    type="submit" value="Reply">
                                             </div>
                                         </form>
                                     </div>
-                                    {% endif %} 
+                                    {% endif %}
                                     <div class="mt-2">
                                         {% for reply in c.replies.all %}
-                                            <div class="flex items-center">
-                                                <span>
-                                                    {% if reply.user.avatar %}
-                                                    <img class="w-6 h-6 rounded-full mr-2"
-                                                            src="{{reply.user.avatar.url}}" alt="">
-                                                    {% else %}
-                                                    <img class="w-6 h-6 rounded-full mr-2" src="https://api.adorable.io/avatars/60/abott@adorable.png" alt="Placeholder image">
-                                                    {% endif %}
-                                                </span>
-                                                {{reply.user.get_full_name}}
-                                            </div>
-                                            <div class="border-gray-300 pl-4 py-2" style="margin-left: 0.6rem; border-left: 3px solid #f3f3f3;">
-                                                <p>{{ reply.comment }}</p>
-                                                <small>{{ reply.created|naturaltime }}</small>
-                                                {% if user.is_authenticated %}
-                                                <div>
-                                                    <span id="upvote" class="text-xs text-gray-700 mr-2">Upvote (11)</span>
-                                                    <span id="reply" class="text-xs text-gray-700 mr-2">Reply</span>
-                                                    <span id="share" class="text-xs text-gray-700 mr-2">Shared</span>
-                                                </div>
+                                        <div class="flex items-center">
+                                            <span>
+                                                {% if reply.user.avatar %}
+                                                <img class="w-6 h-6 rounded-full mr-2" src="{{reply.user.avatar.url}}"
+                                                    alt="">
+                                                {% elif reply.user.default_avatar_img_url %}
+                                                <img class="w-8 h-8 rounded-full"
+                                                    src="{{ reply.user.default_avatar_img_url }}"
+                                                    alt="{{ reply.user.first_name }}">
+                                                {% else %}
+                                                <img class="w-6 h-6 rounded-full mr-2"
+                                                    src="https://api.adorable.io/avatars/60/abott@adorable.png"
+                                                    alt="Placeholder image">
                                                 {% endif %}
+                                            </span>
+                                            {{reply.user.get_full_name}}
+                                        </div>
+                                        <div class="border-gray-300 pl-4 py-2"
+                                            style="margin-left: 0.6rem; border-left: 3px solid #f3f3f3;">
+                                            <p>{{ reply.comment }}</p>
+                                            <small>{{ reply.created|naturaltime }}</small>
+                                            {% if user.is_authenticated %}
+                                            <div>
+                                                <span id="upvote" class="text-xs text-gray-700 mr-2">Upvote (11)</span>
+                                                <span id="reply" class="text-xs text-gray-700 mr-2">Reply</span>
+                                                <span id="share" class="text-xs text-gray-700 mr-2">Shared</span>
                                             </div>
+                                            {% endif %}
+                                        </div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -119,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">
             <div class="h-full object-cover" style="background-image: url({{ resource.thumbnail }})">
@@ -134,11 +157,10 @@
     const replyBtns = document.querySelectorAll('#reply');
 
     replyBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             this.parentElement.nextElementSibling.classList.toggle('hidden');
         });
     });
-
 </script>
 
 {% endblock content %}
