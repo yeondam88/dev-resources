@@ -98,12 +98,17 @@ class SignUpForm(forms.ModelForm):
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
-        user.default_avatar_img_url = AVATAR_URL_PREFIX + \
-            random.choice(AVATARS_CHOICES) + '/' + \
-            self.cleaned_data.get('first_name')
+        user.default_avatar_img_url = self.generateRandomAvatarURL()
         user.username = email
         user.set_password(password)
         user.save()
+
+    def generateRandomAvatarURL(self):
+        url = AVATAR_URL_PREFIX + \
+            random.choice(AVATARS_CHOICES) + '/' + \
+            self.cleaned_data.get('first_name') + '.svg'
+        print(url)
+        return url
 
 
 class EditProfileForm(forms.ModelForm):
