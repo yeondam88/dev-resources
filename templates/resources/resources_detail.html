@@ -22,10 +22,14 @@
                     </span>
                     <span class="flex items-center py-2">
                         {% if resource.author.avatar %}
-                        <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
+                        <a href="{% url 'users:profile' resource.author.pk %}">
+                            <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
+                        </a>
                         {% elif resource.author.default_avatar_img_url %}
-                        <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.default_avatar_img_url }}"
-                            alt="{{ resource.author.first_name }}">
+                        <a href="{% url 'users:profile' resource.author.pk %}">
+                            <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.default_avatar_img_url }}"
+                                alt="{{ resource.author.first_name }}">
+                        </a>
                         {% endif %}
                         <small>shared by {{ resource.author.get_full_name }}</small>
                     </span>
@@ -49,10 +53,14 @@
                         {% csrf_token %}
                         <div class="flex">
                             {% if user.avatar %}
-                            <img class="w-8 h-8 rounded-full mr-2" src="{{user.avatar.url}}" alt="">
+                            <a href="{% url 'users:profile' user.pk %}">
+                                <img class="w-8 h-8 rounded-full mr-2" src="{{user.avatar.url}}" alt="">
+                            </a>
                             {% elif user.default_avatar_img_url %}
-                            <img class="w-8 h-8 rounded-full mr-2" src="{{ user.default_avatar_img_url }}"
-                                alt="{{ user.first_name }}">
+                            <a href="{% url 'users:profile' user.pk %}">
+                                <img class="w-8 h-8 rounded-full mr-2" src="{{ user.default_avatar_img_url }}"
+                                    alt="{{ user.first_name }}">
+                            </a>
                             {% endif %}
                             <input class="border-1" type="text" name="comment" placeholder="comment"
                                 style="height: 32px; padding: 5px;">
@@ -69,14 +77,20 @@
                             <div class="my-2">
                                 <div class="flex items-center"><span>
                                         {% if c.user.avatar %}
-                                        <img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt="">
+                                        <a href="{% url 'users:profile' c.user.pk %}">
+                                            <img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt="">
+                                        </a>
                                         {% elif c.user.default_avatar_img_url %}
-                                        <img class="w-6 h-6 rounded-full mr-2" src="{{ c.user.default_avatar_img_url }}"
-                                            alt="{{ c.user.first_name }}">
+                                        <a href="{% url 'users:profile' c.user.pk %}">
+                                            <img class="w-6 h-6 rounded-full mr-2"
+                                                src="{{ c.user.default_avatar_img_url }}" alt="{{ c.user.first_name }}">
+                                        </a>
                                         {% else %}
-                                        <img class="w-6 h-6 rounded-full"
-                                            src="https://api.adorable.io/avatars/60/abott@adorable.png"
-                                            alt="Placeholder image">
+                                        <a href="{% url 'users:profile' c.user.pk %}">
+                                            <img class="w-6 h-6 rounded-full"
+                                                src="https://api.adorable.io/avatars/60/abott@adorable.png"
+                                                alt="Placeholder image">
+                                        </a>
                                         {% endif %}
                                     </span>{{c.user.get_full_name}}</div>
                                 <div class="border-gray-300 pl-4 py-2"
@@ -108,16 +122,22 @@
                                         <div class="flex items-center">
                                             <span>
                                                 {% if reply.user.avatar %}
-                                                <img class="w-6 h-6 rounded-full mr-2" src="{{reply.user.avatar.url}}"
-                                                    alt="">
+                                                <a href="{% url 'users:profile' reply.user.pk %}">
+                                                    <img class="w-6 h-6 rounded-full mr-2"
+                                                        src="{{reply.user.avatar.url}}" alt="">
+                                                </a>
                                                 {% elif reply.user.default_avatar_img_url %}
-                                                <img class="w-6 h-6 rounded-full mr-2"
-                                                    src="{{ reply.user.default_avatar_img_url }}"
-                                                    alt="{{ reply.user.first_name }}">
+                                                <a href="{% url 'users:profile' reply.user.pk %}">
+                                                    <img class="w-6 h-6 rounded-full mr-2"
+                                                        src="{{ reply.user.default_avatar_img_url }}"
+                                                        alt="{{ reply.user.first_name }}">
+                                                </a>
                                                 {% else %}
-                                                <img class="w-6 h-6 rounded-full mr-2"
-                                                    src="https://api.adorable.io/avatars/60/abott@adorable.png"
-                                                    alt="Placeholder image">
+                                                <a href="{% url 'users:profile' reply.user.pk %}">
+                                                    <img class="w-6 h-6 rounded-full mr-2"
+                                                        src="https://api.adorable.io/avatars/60/abott@adorable.png"
+                                                        alt="Placeholder image">
+                                                </a>
                                                 {% endif %}
                                             </span>
                                             {{reply.user.get_full_name}}

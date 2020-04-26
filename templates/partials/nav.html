@@ -168,8 +168,8 @@
             </span>
         </li>
         {% if user.is_authenticated %}
-        <li class="mr-6 dropdown relative">
-            <a href="/users/profile/@{{user.slug}}">
+        <li class="mr-6 dropdown relative p-2">
+            <a href="{% url 'users:profile' user.pk %}">
                 {% if user.avatar %}
                     <img class="w-8 h-8 rounded-full" src="{{ user.avatar.url }}" alt="{{ user.first_name }}">
                 {% elif user.default_avatar_img_url %}
