@@ -98,7 +98,7 @@ class SignUpForm(forms.ModelForm):
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
-        user.default_avatar_img_url = self.generateRandomAvatarURL(self)
+        user.default_avatar_img_url = self.generateRandomAvatarURL()
         user.username = email
         user.set_password(password)
         user.save()
