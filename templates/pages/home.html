@@ -56,7 +56,7 @@ For Developer's resources
                     style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
                 <div class="flex items-center">
                     <span class="text-sm text-gray-600 block mr-2 small-thumbnail">
-                        <a href="/users/profile/@{{ resource.author.username }}/">
+                        <a href="{% url 'users:profile' resource.author.pk %}">
                             {% if resource.author.avatar %}
                             <img src="{{ resource.author.avatar.url }}" alt="">
                             {% elif user.default_avatar_img_url %}

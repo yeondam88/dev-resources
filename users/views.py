@@ -99,7 +99,7 @@ class ProfileView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = models.User.objects.get(slug=self.kwargs['slug'])
+        user = models.User.objects.get(pk=self.kwargs['pk'])
         resources = self.get_related_resources(user)
         print(resources)
         context['resources'] = resources
