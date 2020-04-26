@@ -24,7 +24,7 @@
                         {% if resource.author.avatar %}
                         <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.avatar.url }}" alt="">
                         {% elif resource.author.default_avatar_img_url %}
-                        <img class="w-8 h-8 rounded-full" src="{{ resource.author.default_avatar_img_url }}"
+                        <img class="w-8 h-8 rounded-full mr-4" src="{{ resource.author.default_avatar_img_url }}"
                             alt="{{ resource.author.first_name }}">
                         {% endif %}
                         <small>shared by {{ resource.author.get_full_name }}</small>
@@ -51,7 +51,7 @@
                             {% if user.avatar %}
                             <img class="w-8 h-8 rounded-full mr-2" src="{{user.avatar.url}}" alt="">
                             {% elif user.default_avatar_img_url %}
-                            <img class="w-8 h-8 rounded-full" src="{{ user.default_avatar_img_url }}"
+                            <img class="w-8 h-8 rounded-full mr-2" src="{{ user.default_avatar_img_url }}"
                                 alt="{{ user.first_name }}">
                             {% endif %}
                             <input class="border-1" type="text" name="comment" placeholder="comment"
@@ -71,7 +71,7 @@
                                         {% if c.user.avatar %}
                                         <img class="w-6 h-6 rounded-full mr-2" src="{{c.user.avatar.url}}" alt="">
                                         {% elif c.user.default_avatar_img_url %}
-                                        <img class="w-8 h-8 rounded-full" src="{{ c.user.default_avatar_img_url }}"
+                                        <img class="w-6 h-6 rounded-full mr-2" src="{{ c.user.default_avatar_img_url }}"
                                             alt="{{ c.user.first_name }}">
                                         {% else %}
                                         <img class="w-6 h-6 rounded-full"
@@ -111,7 +111,7 @@
                                                 <img class="w-6 h-6 rounded-full mr-2" src="{{reply.user.avatar.url}}"
                                                     alt="">
                                                 {% elif reply.user.default_avatar_img_url %}
-                                                <img class="w-8 h-8 rounded-full"
+                                                <img class="w-6 h-6 rounded-full mr-2"
                                                     src="{{ reply.user.default_avatar_img_url }}"
                                                     alt="{{ reply.user.first_name }}">
                                                 {% else %}
