@@ -11,15 +11,18 @@ from django.contrib.auth.views import (
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.base import ContentFile
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, FormView, UpdateView
+from django.views.generic import View, DetailView, FormView, UpdateView
 from . import forms, mixins, models
 from django.core.paginator import Paginator
 from resources.models import Resources
 
+import json
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 
-class LoginView(mixins.LoggedOutOnlyView, FormView):
+class LoginView(FormView):
 
     template_name = "pages/signin-page.html"
     form_class = forms.LoginForm
@@ -27,9 +30,7 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
-        print(email, password)
         user = authenticate(self.request, username=email, password=password)
-        print(user)
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)

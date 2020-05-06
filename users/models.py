@@ -37,7 +37,7 @@ class User(AbstractUser):
                          unique=True, always_update=False, populate_from="username")
 
     def get_absolute_url(self):
-        return reverse("users:profile", kwargs={"slug": self.slug})
+        return reverse("users:profile", kwargs={"pk": self.pk})
 
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name

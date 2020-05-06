@@ -167,13 +167,13 @@
             </form>
             </span>
         </li>
-        {% if user.is_authenticated %}
+        {% if request.user.is_authenticated %}
         <li class="mr-6 dropdown relative p-2">
             <a href="{% url 'users:profile' user.pk %}">
-                {% if user.avatar %}
+                {% if request.user.avatar %}
                     <img class="w-8 h-8 rounded-full" src="{{ user.avatar.url }}" alt="{{ user.first_name }}">
-                {% elif user.default_avatar_img_url %}
-                    <img class="w-8 h-8 rounded-full" src="{{ user.default_avatar_img_url }}" alt="{{ user.first_name }}">
+                {% elif request.user.default_avatar_img_url %}
+                    <img class="w-8 h-8 rounded-full" src="{{ request.user.default_avatar_img_url }}" alt="{{ user.first_name }}">
                 {% else %}
                     <img class="w-8 h-8 rounded-full" src="https://api.adorable.io/avatars/60/abott@adorable.png" alt="Placeholder image">
                 {% endif %}

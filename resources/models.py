@@ -33,7 +33,7 @@ class Resources(TimeStampedModel):
     tags = TaggableManager()
     resource_type = models.CharField(
         max_length=50, choices=RESOURCE_TYPES, null=True, blank=True)
-    thumbnail = models.URLField(max_length=200, null=True)
+    thumbnail = models.URLField(max_length=200, null=True, blank=True)
     slug = AutoSlugField("Resource Address",
                          null=True,
                          unique=True, always_update=False, populate_from="title")
