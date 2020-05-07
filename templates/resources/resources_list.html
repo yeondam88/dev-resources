@@ -12,7 +12,7 @@
                     style="background-image: url({{resource.thumbnail}}); height: 386px;"></div>
                 <div class="flex items-center">
                     <span class="text-sm text-gray-600 block mr-2 small-thumbnail"><a
-                            href="{% url 'user:profile' resource.author.slug %}"><img
+                            href="{% url 'user:profile' resource.author.pk %}"><img
                                 src="{{ resource.author.avatar.url }}" alt=""></a></span>
                     <span class="text-black block"><a
                             href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</span></a>
