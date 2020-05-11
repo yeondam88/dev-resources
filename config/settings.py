@@ -46,10 +46,13 @@ PROJECT_APPS = [
     'users.apps.UsersConfig',
     'resources.apps.ResourcesConfig',
     'comments.apps.CommentsConfig',
+    'api.apps.ApiConfig',
 ]
 
 THIRD_PARTIES_APP = [
     'taggit',
+    'taggit_serializer',
+    'rest_framework',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTIES_APP
@@ -146,6 +149,12 @@ EMAIL_FROM = "support@sandboxaa3646432a134bffaae8c299018d1980.mailgun.org"
 
 # Auth
 LOGIN_URL = "/users/login"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 
 
 try:
