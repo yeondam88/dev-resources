@@ -5,7 +5,7 @@ from taggit_serializer.serializers import (TagListSerializerField,
                                            TaggitSerializer)
 
 
-class CommentSerialzier(serializers.ModelSerialzier):
+class CommentSerialzier(serializers.ModelSerializer):
 
     class Meta:
         model = Comments
