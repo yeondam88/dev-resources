@@ -2,7 +2,6 @@
 
 Django Fullstack application
 
-Dev resource sharing web app.
 
 TODO:
 
@@ -14,3 +13,6 @@ TODO:
 
 - build react native app..
 Site address http://206.189.172.53/
+
+
+
