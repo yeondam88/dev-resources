@@ -10,7 +10,7 @@ TODO:
 - Maybe add GraphQL with Graphene package..
 - Add to docker and postgresql and deploy to digital ocean
 
-
+---------
 - build react native app..
 Site address http://206.189.172.53/
 
