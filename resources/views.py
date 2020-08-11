@@ -1,3 +1,4 @@
+import random
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -8,7 +9,8 @@ from . import forms
 from django.contrib import messages
 
 
-RANDOM_IMAGE_URL = 'https://source.unsplash.com/1600x900/'
+RANDOM_IMAGE_URL = 'https://source.unsplash.com/1600x900/?'
+RANDON_COLLECTION_KEYWORD = ['macbook', 'programming', 'iphone', 'dev', 'computer', 'software']
 
 class ResourceListView(ListView):
 
@@ -29,7 +31,7 @@ class ResourceCreationView(LoginRequiredMixin, FormView):
         thumbnail = form.cleaned_data.get('thumbnail')
         resource = form.save()
         if thumbnail is None:
-            resource.thumbnail = RANDOM_IMAGE_URL
+            resource.thumbnail = RANDOM_IMAGE_URL + random.choice(RANDON_COLLECTION_KEYWORD)
         resource.author = user
         resource.save()
         for tag in tags:
